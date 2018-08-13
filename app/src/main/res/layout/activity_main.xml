@@ -8,6 +8,24 @@
     android:minHeight="250dp"
     tools:context=".MainActivity">
 
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/profile_button_register"
+        android:text="Change Photo"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:textColor="@color/whiteColor"
+        app:layout_constraintBottom_toTopOf="@id/username_edittext_registration"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
     <EditText
         android:id="@+id/username_edittext_registration"
         android:layout_width="0dp"
@@ -17,14 +35,15 @@
         android:layout_marginRight="32dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
-        android:ems="10"
         android:background="@drawable/rounded_edittext_register_login"
+        android:ems="10"
         android:hint="UserName"
         android:inputType="textPersonName"
         android:paddingLeft="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/button" />
 
     <EditText
         android:id="@+id/email_edittext_registration"
@@ -37,6 +56,7 @@
         android:inputType="textEmailAddress"
         android:paddingLeft="16dp"
         app:layout_constraintEnd_toEndOf="@+id/username_edittext_registration"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/username_edittext_registration"
         app:layout_constraintTop_toBottomOf="@+id/username_edittext_registration" />
 
@@ -58,7 +78,12 @@
         android:id="@+id/register_button_register"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_button"
         android:text="Register"
+        android:textColor="@color/whiteColor"
+        android:textSize="20dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/password_edittext_registration"
         app:layout_constraintStart_toStartOf="@+id/password_edittext_registration"
         app:layout_constraintTop_toBottomOf="@+id/password_edittext_registration" />
@@ -76,4 +101,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/register_button_register" />
+
+
 </android.support.constraint.ConstraintLayout>
