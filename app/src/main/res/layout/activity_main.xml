@@ -6,20 +6,20 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
     android:minHeight="250dp"
-    tools:context=".MainActivity">
+    tools:context=".RegisterActivity">
 
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/selectphoto_button_register"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginBottom="16dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/profile_button_register"
-        android:text="Change Photo"
+        android:text="Select Photo"
+        android:textColor="@color/whiteColor"
         android:textSize="16dp"
         android:textStyle="bold"
-        android:textColor="@color/whiteColor"
         app:layout_constraintBottom_toTopOf="@id/username_edittext_registration"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +43,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/selectphoto_button_register" />
 
     <EditText
         android:id="@+id/email_edittext_registration"
