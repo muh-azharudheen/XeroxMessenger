@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "373140057325",
+    "firebase_url": "https://firmessenger-25900.firebaseio.com",
+    "project_id": "firmessenger-25900",
+    "storage_bucket": "firmessenger-25900.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:373140057325:android:f1088f7ca987db8c",
+        "android_client_info": {
+          "package_name": "xerox.kotlinfirebasemessenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "373140057325-8olfm5g55tb8p3ct1p9fauljsc2krbkb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVVAdWXcn48bbLvbWZvKjbASZV33_QG-g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
