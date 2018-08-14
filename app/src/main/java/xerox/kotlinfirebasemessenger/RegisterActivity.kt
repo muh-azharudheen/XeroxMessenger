@@ -28,7 +28,7 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         already_have_an_account_textview.setOnClickListener {
-            Log.d("Main Activity", "try to show login activity")
+            Log.d("Register Activity", "try to show login activity")
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
 
@@ -64,14 +64,15 @@ class RegisterActivity : AppCompatActivity() {
     private fun performRegister(){
         val email = email_edittext_registration.text.toString()
         val password = password_edittext_registration.text.toString()
+        val userName = username_edittext_registration.text.toString()
 
-        if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Please Fill Email/Password", Toast.LENGTH_SHORT).show()
+        if (email.isEmpty() || password.isEmpty() || userName.isEmpty()) {
+            Toast.makeText(this, "Please Fill Name/Email/Password", Toast.LENGTH_SHORT).show()
             return
         }
 
-        Log.d("Main Activity", "Email $email")
-        Log.d("Main Activity", "Password $password")
+        Log.d("Register Activity", "Email $email")
+        Log.d("Register Activity", "Password $password")
 
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener {
@@ -89,12 +90,41 @@ class RegisterActivity : AppCompatActivity() {
         val filename = UUID.randomUUID().toString()
         val ref = FirebaseStorage.getInstance().getReference("images/$filename")
 
+
         ref.putFile(selectedPhotoUri!!)
                 .addOnSuccessListener {
-
+                    Log.d("Register Activity", "Successfully uploaded image ${it.metadata?.path}")
+                    ref.downloadUrl.addOnSuccessListener {
+                        Log.d("Register Activity","download url ok ${it.toString()}")
+                        saveuserToDatabase(it.toString())
+                    }
+                    ref.downloadUrl.addOnFailureListener {
+                        saveuserToDatabase("")
+                    }
+                }
+                .addOnFailureListener {
+                    Log.d("Register Activity","Failure in uploading Image")
                 }
 
 
     }
+
+    private fun saveuserToDatabase(profileImageURL: String){
+        val uid = FirebaseAuth.getInstance().uid ?: ""
+        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+        val user = User(uid,username_edittext_registration.toString() , profileImageURL)
+        ref.setValue(user)
+                .addOnSuccessListener {
+                Log.d("Register Activity", "Finally we saved user to database")
+                }
+                .addOnFailureListener {
+                    Log.d("Register Acitvity","Failed to save user to database")
+                }
+
+    }
+}
+
+
+class User(val userId: String, username: String, profileImageURL: String){
 
 }
