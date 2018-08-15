@@ -10,10 +10,11 @@ import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
+import kotlin.collections.HashMap
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -53,9 +54,9 @@ class RegisterActivity : AppCompatActivity() {
             selectedPhotoUri = data.data
 
             val bitmap = MediaStore.Images.Media.getBitmap(contentResolver,selectedPhotoUri)
+            selectphoto_button_register.alpha = 0.0f
 
-            val bitmapDrawable = BitmapDrawable(bitmap)
-            selectphoto_button_register.setBackgroundDrawable(bitmapDrawable)
+            selectphoto_imageview_register.setImageBitmap(bitmap)
 
         }
     }
@@ -111,20 +112,30 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun saveuserToDatabase(profileImageURL: String){
         val uid = FirebaseAuth.getInstance().uid ?: ""
-        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
-        val user = User(uid,username_edittext_registration.toString() , profileImageURL)
-        ref.setValue(user)
+
+        val dbRef = FirebaseFirestore.getInstance()
+        val user = User(uid,username_edittext_registration.text.toString() , profileImageURL)
+        val uuuu = HashMap<String,Any>()
+        uuuu.put("id", user.userId)
+        uuuu.put("userName",user.username)
+        uuuu.put("profileImageUrl",user.profileImageURL)
+
+        val userData = mapOf(uid to uuuu)
+
+        dbRef.collection("user")
+                .add(userData)
                 .addOnSuccessListener {
-                Log.d("Register Activity", "Finally we saved user to database")
+                    Log.d("Register", "successfully added Profile Image")
                 }
                 .addOnFailureListener {
-                    Log.d("Register Acitvity","Failed to save user to database")
+                    Log.d("Register", it.toString())
+                    Log.d("Register", "failed to load profile image")
                 }
 
     }
 }
 
 
-class User(val userId: String, username: String, profileImageURL: String){
+class User(val userId: String, val username: String, val profileImageURL: String){
 
 }
