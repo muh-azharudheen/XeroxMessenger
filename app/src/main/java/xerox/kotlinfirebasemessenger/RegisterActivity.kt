@@ -126,13 +126,15 @@ class RegisterActivity : AppCompatActivity() {
                 .add(userData)
                 .addOnSuccessListener {
                     Log.d("Register", "successfully added Profile Image")
+                    val intent = Intent(this,LatestMessageActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    startActivity(intent)
                 }
                 .addOnFailureListener {
                     Log.d("Register", it.toString())
                     Log.d("Register", "failed to load profile image")
                 }
-
-    }
+        }
 }
 
 
